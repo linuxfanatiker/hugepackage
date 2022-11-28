@@ -1,0 +1,38 @@
+#.convert('HSV')
+import copy
+
+from PIL import Image, ImageEnhance
+import numpy as np
+from matplotlib import pyplot as plt
+def pixelspas( im, new_item, yellow):
+    for pixel in im.getdata():
+        if (((pixel[0] + 1) / (pixel[1] + 1)) > 0.9 and ((pixel[0] + 1) / (pixel[1] + 1)) < 1.4 and 50 < pixel[2] < 200]):  # (np.all(pixel >lower_yellow) )
+            yellow = yellow + 1
+            new_item.append((0, 255, 0))
+        else:
+            new_item.append(pixel)
+    im.putdata(new_item)
+    print(yellow)
+    plt.subplot(121)
+    plt.imshow(img), plt.axis("off")
+    plt.subplot(122)
+    plt.imshow(im), plt.axis("off")
+    plt.show()
+    yellow = yellow/(600*800)
+    return yellow
+
+
+yellow = 0
+new_item = []
+ellow = []
+"""
+for i in range(0,25):
+    img = Image.open('C:\\Test\\'+ str(i) + '.png')
+    im = copy.deepcopy(img)
+    ellow.append(pixelspas(im, new_item, yellow))
+print(ellow)
+"""
+img = Image.open('C:\\Test\\25.png')
+im = copy.deepcopy(img)
+ellow.append(pixelspas(im, new_item, yellow))
+#im= im.convert('P', palette=Image.ADAPTIVE, colors=3)#.convert('RGB')
