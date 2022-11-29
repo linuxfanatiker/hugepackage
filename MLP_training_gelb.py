@@ -2,18 +2,18 @@
 import sklearn.datasets as skl_data
 import sklearn.neural_network as skl_nn
 import pickle
+
 from skimage import io
 
-importfromweb = False
 # Datenimport (MNIST Datensatz)
-    data = pickle.load(open("mnist_data", 'rb'))
-    labels = pickle.load(open("mnist_labels", 'rb'))
+data = pickle.load(open("dataarray", 'rb'))
+labels = pickle.load(open("testdaten\\M\\labels.csv", 'rb'))
 
 # Datensplit
-data_train = data[0:63000]
-labels_train = labels[0:63000]
-data_test = data[63001:]
-labels_test = labels[63001:]
+data_train = data[0:150]
+labels_train = labels[0:150]
+data_test = data[150:]
+labels_test = labels[150:]
 
 test_digit = data_test.iloc[0].to_numpy()
 
@@ -29,4 +29,4 @@ print("Training set score", mlp.score(data_train, labels_train))
 print("Testing set score", mlp.score(data_test, labels_test))
 
 # Speichere Netzwerk auf der Platte
-pickle.dump(mlp, open("MLP_classifier", 'wb'))
+pickle.dump(mlp, open("MLP_classifier_gelb", 'wb'))

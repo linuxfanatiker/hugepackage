@@ -25,7 +25,7 @@ def pixelspas( im, new_item, yellow):
 yellow = 0
 new_item = []
 ellow = []
-runs=20
+runs=201
 #"""
 for i in range(0,runs):
     img = Image.open('C:\\Test\\'+ str(i) + '.png')
