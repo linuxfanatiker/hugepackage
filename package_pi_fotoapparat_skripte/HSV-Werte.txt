@@ -1,0 +1,4 @@
+HSV-Werte: 
+Hue: 19 bis 90 
+Saturation: mehr als 20
+Value: mehr als 70
