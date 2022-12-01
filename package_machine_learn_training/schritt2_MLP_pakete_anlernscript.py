@@ -20,9 +20,11 @@ labels_train = []
 data_test = []
 labels_test = []
 
-sample_labels_csv = sys.argv[1]
+output_file= sys.argv[1]
 
-with open(sample_labels_csv, newline='') as csvfile:
+#sample_labels_csv = sys.argv[1]
+
+with open('sample_labels_rev1.csv', newline='') as csvfile:
 	complete_csv = csv.reader(csvfile, delimiter=',')
 	for row in complete_csv:
 		complete_content.append([ [float(row[1])], row[2] ])
@@ -72,8 +74,8 @@ print("Test Ergebnis: labels")
 print(labels_test)
 
 
-hidden_neurons=[5,50,60,80,100]        # Anzahl der Neuronen für die verschiedenen Durchläufe
-#hidden_neurons=[1,2,3,4,5]        # Anzahl der Neuronen für die verschiedenen Durchläufe
+#hidden_neurons=[5,50,60,80,100]        # Anzahl der Neuronen für die verschiedenen Durchläufe
+hidden_neurons=[1,2,3,4,5,20,40]        # Anzahl der Neuronen für die verschiedenen Durchläufe
 mean_score_train=[]
 mean_score_test=[]
 
@@ -94,12 +96,12 @@ for current_neurons in hidden_neurons:
         mean_score_train[cur_neur_no]+=current_train_score
         mean_score_test[cur_neur_no]+=current_test_score
         i+=1
+    print("Speichere Classifier")
+    pickle.dump(mlp, open(output_file+"_with_"+str(current_neurons)+"_neurons", 'wb'))
     mean_score_train[cur_neur_no]/=i;
     mean_score_test[cur_neur_no]/=i;
     cur_neur_no+=1
 
-print("Speichere Classifier")
-pickle.dump(mlp, open("MLP_classifier_hugepackage", 'wb'))
 
 cur_neur_no = 0
 print("Ergebnisse \n");
