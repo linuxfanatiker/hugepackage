@@ -4,22 +4,24 @@ from PIL import Image, ImageEnhance
 import numpy as np
 import pickle
 from matplotlib import pyplot as plt
-def pixelspas( im, new_item, yellow):
+def pixelspas( im):
+    yellow = 0
+    new_item = []
     for pixel in im.getdata():
-        if (19<pixel[0]<90  and pixel[1]>50 and 50<pixel[2]):  # (np.all(pixel >lower_yellow) ) and 25<pixel[1] and 50<pixel[2]
-            yellow = yellow + 1
-            new_item.append((0, 100, 100))
+        if(19 < pixel[0] < 90 and pixel[1] > 5 and 50 < pixel[2]):  # (np.all(pixel >lower_yellow) ) and 25<pixel[1] and 50<pixel[2]
+            yellow += 1
+            new_item.append((0, 255, 255))
         else:
             new_item.append(pixel)
-    """
     im.putdata(new_item)
-    print(yellow)
     plt.subplot(121)
     plt.imshow(img), plt.axis("off")
     plt.subplot(122)
     plt.imshow(im), plt.axis("off")
-    plt.show()#"""
-    yellow = yellow/(600*800)
+    plt.show()
+    yellow /=(600*800)
+
+   # print("rueckgabe der pixelspas "+str(yellow))
     return yellow
 
 yellow = 0
@@ -29,10 +31,9 @@ runs=201
 #"""
 for i in range(0,runs):
     img = Image.open('C:\\Test\\'+ str(i) + '.png')
-    im = copy.deepcopy(img)
-    ellow.append(pixelspas(im, new_item, yellow))
+    im = copy.deepcopy(img).convert('HSV')
+    ellow.append(pixelspas(im))
     print(ellow[i],str(i))
-
 
 plt.plot(range(0,runs),ellow)
 plt.show()
