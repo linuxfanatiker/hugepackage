@@ -29,8 +29,10 @@ new_item = []
 ellow = []
 runs=201
 #"""
+
 for i in range(0,runs):
-    img = Image.open('C:\\Test\\'+ str(i) + '.png')
+    #img = Image.open('C:\\Test\\'+ str(i) + '.png') #C:\Users\m4xr0\Documents\GitHub\hugepackage\package_testdaten\2022.11.30_testdaten_rev2
+    img = Image.open('C:\\Users\\m4xr0\\Documents\\GitHub\\hugepackage\\package_testdaten\\2022.11.30_testdaten_rev2\\' + str(i) + '.png')
     im = copy.deepcopy(img).convert('HSV')
     ellow.append(pixelspas(im))
     print(ellow[i],str(i))
