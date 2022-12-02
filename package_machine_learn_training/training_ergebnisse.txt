@@ -17,3 +17,53 @@ Mean train score (accuracy) = 0.5064456721915286
 Mean test score (accuracy) = 0.5333333333333333
 
 *****************************************************+++
+
+Ergebnisse für Testsets rev1+2 1.12.2022
+
+Fuer 1 Neuronen
+Mean train score (accuracy) = 0.6197440585009141
+Mean test score (accuracy) = 0.45000000000000007
+Fuer 2 Neuronen
+Mean train score (accuracy) = 0.29067641681901274
+Mean test score (accuracy) = 0.26666666666666666
+Fuer 3 Neuronen
+Mean train score (accuracy) = 0.29067641681901274
+Mean test score (accuracy) = 0.26666666666666666
+Fuer 4 Neuronen
+Mean train score (accuracy) = 0.29067641681901274
+Mean test score (accuracy) = 0.26666666666666666
+Fuer 5 Neuronen
+Mean train score (accuracy) = 0.5228519195612432
+Mean test score (accuracy) = 0.38333333333333336
+Fuer 20 Neuronen
+Mean train score (accuracy) = 0.7001828153564899
+Mean test score (accuracy) = 0.6666666666666667
+Fuer 40 Neuronen
+Mean train score (accuracy) = 0.6983546617915904
+Mean test score (accuracy) = 0.6833333333333335
+
+*******************************************************
+
+Ergebnisse 
+Fuer 1 Neuronen
+Mean train score (accuracy) = 0.28884826325411334
+Mean test score (accuracy) = 0.28333333333333327
+Fuer 2 Neuronen
+Mean train score (accuracy) = 0.28884826325411334
+Mean test score (accuracy) = 0.28333333333333327
+Fuer 3 Neuronen
+Mean train score (accuracy) = 0.6142595978062158
+Mean test score (accuracy) = 0.5666666666666665
+Fuer 4 Neuronen
+Mean train score (accuracy) = 0.7001828153564899
+Mean test score (accuracy) = 0.6833333333333335
+Fuer 5 Neuronen
+Mean train score (accuracy) = 0.28884826325411334
+Mean test score (accuracy) = 0.28333333333333327
+Fuer 20 Neuronen
+Mean train score (accuracy) = 0.7605118829981717
+Mean test score (accuracy) = 0.7166666666666667
+Fuer 40 Neuronen
+Mean train score (accuracy) = 0.7751371115173675
+Mean test score (accuracy) = 0.7166666666666667
+
