@@ -23,8 +23,10 @@ while [ true ]; do
   echo "Jetzt dieses Bild verarbeiten"
   echo "Feature: Anzahl der gelben Pixel feststellen"
   GELBEPIXEL=`python ./gelbanteil_feststellen.py $FILENAME`
+  REIHE=`python ./laengstereihe_feststellen.py $FILENAME`
   echo "Gelbanteil is $GELBEPIXEL"
+  echo "Laenste Reihe ist $REIHE"
   echo "Erkennung laufen lassen"
-  python ./mlp_inference_durchfuehren.py $GELBEPIXEL
+  python ./mlp_inference_durchfuehren.py $GELBEPIXEL $REIHE
 done
 
