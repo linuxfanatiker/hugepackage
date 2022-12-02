@@ -5,6 +5,8 @@ I=0
 KEY=1
 
 pigs modes 23 r
+pigs modes 18 w
+pigs w 18 0
 
 while [ true ]; do
   while [ $KEY -ge 1 ]
@@ -13,7 +15,9 @@ while [ true ]; do
   done
   echo "Ausloeser gedrueckt"
   KEY=1
-  raspistill -o ./$FILENAME_$I.png -w 800 -h 600 -t 500
+  pigs w 18 1
+  raspistill -e png -o ./$FILENAME_$I.png -w 800 -h 600 -t 500
+  pigs w 18 0
   echo "$FILENAME_$I.png erstellt"
   kill $!
   gpicview ./$FILENAME_$I.png &
