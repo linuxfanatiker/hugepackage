@@ -28,10 +28,35 @@ def yellow_features(img):
         if (yellow_pixel_per_row[current_row]>yellow_pixel_per_row[yellow_pixel_largest_row]):
             yellow_pixel_largest_row=current_row                        # Diese Reihe beinhaltet das größte Vorkommen gelber Pixel. Merken.
 
+    # Schritt 4: Anzahl der gelben Reihen über und unter der Reihe
+    yellow_rows_above_maximum = 0
+    yellow_rows_below_maximum = 0
+    skipped_lines=0
+    threshold=width*0.02;
+    # Zähle alle Reihen oberhalb der "längsten gelben Reihe"
+    for i in range(1,yellow_pixel_largest_row):
+        if (yellow_pixel_per_row[yellow_pixel_largest_row-i]>threshold):
+            yellow_rows_above_maximum += 1
+        elif (skipped_lines>height*0.05):
+            break;
+        else:
+            skipped_lines += 1
+    skipped_lines = 0
+    # Zähle alle Reihen unterhalb der "längsten gelben Reihe"
+    for current_row in range(yellow_pixel_largest_row+1, height-1):
+        if (yellow_pixel_per_row[current_row]>threshold):
+            yellow_rows_below_maximum += 1
+        elif (skipped_lines>height*0.05):
+            break;
+        else:
+            skipped_lines += 1
+
     yellow_pixel_amount_normed = yellow_pixel_amount / (width*height)
     yellow_pixel_largest_row_normed = yellow_pixel_largest_row / height
+    yellow_rows_above_maximum_normed = yellow_rows_above_maximum / height
+    yellow_rows_below_maximum_normed = yellow_rows_below_maximum / height
 
-    return [yellow_pixel_amount_normed, yellow_pixel_largest_row_normed]
+    return [yellow_pixel_amount_normed, yellow_pixel_largest_row_normed, yellow_rows_above_maximum_normed, yellow_rows_below_maximum_normed]
 
 def plot_img_with_yellow_pixels(img):
     # Aufloesung feststellen
