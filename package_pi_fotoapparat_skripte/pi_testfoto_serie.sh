@@ -16,11 +16,11 @@ while [ true ]; do
   echo "Ausloeser gedrueckt"
   KEY=1
   pigs w 18 1
-  raspistill -e png -o ./$FILENAME_$I.png -w 800 -h 600 -t 500
+  raspistill -e png -o "$FILENAME/$I.png" -w 800 -h 600 -t 500
   pigs w 18 0
   echo "$FILENAME_$I.png erstellt"
   kill $!
-  gpicview ./$FILENAME_$I.png &
+  gpicview "$FILENAME/$I.png" &
   I=$(( $I + 1 ))
 done
 

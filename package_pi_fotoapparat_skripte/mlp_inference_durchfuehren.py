@@ -14,7 +14,7 @@ current_feature.append( [float(sys.argv[1]),float(sys.argv[2])] )
 mlp = pickle.load(open("MLP_classifier_hugepackage", 'rb'))
 
 # Inferenz mit MLP Modell
-print('Prediction von '+str(current_feature))
+print('PY: Prediction von '+str(current_feature))
 prediction = mlp.predict(current_feature)
-print("Predicted value "+str(prediction))
-
+print("PY: Predicted value "+str(prediction[0]))
+sys.exit(int(prediction[0]))

@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 
 
 def yellow_features(img):
-    # Aufloesung feststellen    
+    # Aufloesung feststellen
     width, height = img.size
 
     yellow_pixel_amount=0
@@ -34,7 +34,7 @@ def yellow_features(img):
     return [yellow_pixel_amount_normed, yellow_pixel_largest_row_normed]
 
 def plot_img_with_yellow_pixels(img):
-    # Aufloesung feststellen    
+    # Aufloesung feststellen
     width, height = img.size
 
     leuchtend_rot_hsv = (0, 255, 255)
