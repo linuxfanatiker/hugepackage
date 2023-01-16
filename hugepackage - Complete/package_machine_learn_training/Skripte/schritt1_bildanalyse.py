@@ -12,7 +12,7 @@ import glob
 import sys
 import os
 from natsort import natsorted
-sys.path.append("../libraries")
+sys.path.append("../../libraries")
 from gelberkennung import yellow_features
 
 sorted_filelist = []
@@ -26,6 +26,8 @@ sorted_filelist = natsorted(sorted_filelist)
 
 bilder_gelb_anteil = []
 bilder_laengste_reihe = []
+bilder_gelb_ueber_max = []
+bilder_gelb_unter_max = []
 
 for file in sorted_filelist:
     print ("Verarbeite Bild " + path_to_files+"/"+file)
@@ -33,13 +35,15 @@ for file in sorted_filelist:
     analyse = yellow_features(aktuelles_bild)
     bilder_gelb_anteil.append(analyse[0])
     bilder_laengste_reihe.append(analyse[1])
+    bilder_gelb_ueber_max.append(analyse[2])
+    bilder_gelb_unter_max.append(analyse[3])
 
-plt.plot(range(0,len(sorted_filelist)),bilder_gelb_anteil)
+plt.plot(range(0,len(sorted_filelist)),bilder_gelb_anteil, bilder_gelb_ueber_max, bilder_gelb_unter_max)
 plt.show()
 
 outfile=open(output_filename, 'w')
 for i in range(0, len(bilder_gelb_anteil)):
-    ausgabe = str(bilder_gelb_anteil[i])+","+str(bilder_laengste_reihe[i])
+    ausgabe = str(bilder_gelb_anteil[i])+","+str(bilder_laengste_reihe[i])+","+str(bilder_gelb_ueber_max[i])+","+str(bilder_gelb_unter_max[i])
     print(ausgabe)
     outfile.write(ausgabe+"\n")
     i += 1

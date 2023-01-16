@@ -6,7 +6,6 @@ import pickle
 import numpy as np
 import csv
 import random
-import sys
 
 from skimage import io
 
@@ -20,14 +19,10 @@ labels_train = []
 data_test = []
 labels_test = []
 
-output_file= sys.argv[1]
-
-#sample_labels_csv = sys.argv[1]
-
 with open('sample_labels_rev1.csv', newline='') as csvfile:
 	complete_csv = csv.reader(csvfile, delimiter=',')
 	for row in complete_csv:
-		complete_content.append([ [ float(row[1]), float(row[2]), float(row[3]), float(row[4]) ], row[5] ])
+		complete_content.append([ [float(row[1])], row[2] ])
 
 	random.shuffle(complete_content)
 	no_samples=len(complete_content)
@@ -43,11 +38,11 @@ with open('sample_labels_rev1.csv', newline='') as csvfile:
 		data_test.append(complete_content[i][0])
 		labels_test.append(complete_content[i][1])
 		i=i+1
+
 with open('sample_labels_rev2.csv', newline='') as csvfile:
 	complete_csv = csv.reader(csvfile, delimiter=',')
 	for row in complete_csv:
-		complete_content.append([ [ float(row[1]), float(row[2]), float(row[3]), float(row[4]) ], row[5] ])
-#		complete_content.append([ [float(row[1])], row[2] ])
+		complete_content.append([ [float(row[1])], row[2] ])
 
 	random.shuffle(complete_content)
 	no_samples=len(complete_content)
@@ -63,6 +58,7 @@ with open('sample_labels_rev2.csv', newline='') as csvfile:
 		data_test.append(complete_content[i][0])
 		labels_test.append(complete_content[i][1])
 		i=i+1
+
 
 print("Train Ergebnis: Daten")
 print(data_train)
@@ -75,8 +71,8 @@ print("Test Ergebnis: labels")
 print(labels_test)
 
 
-#hidden_neurons=[5,50,60,80,100]        # Anzahl der Neuronen für die verschiedenen Durchläufe
-hidden_neurons=[1,2,3,4,5,20,40]        # Anzahl der Neuronen für die verschiedenen Durchläufe
+hidden_neurons=[1,5,10,25,50]        # Anzahl der Neuronen für die verschiedenen Durchläufe
+#hidden_neurons=[1,5]        # Anzahl der Neuronen für die verschiedenen Durchläufe
 mean_score_train=[]
 mean_score_test=[]
 
@@ -97,19 +93,16 @@ for current_neurons in hidden_neurons:
         mean_score_train[cur_neur_no]+=current_train_score
         mean_score_test[cur_neur_no]+=current_test_score
         i+=1
-    print("Speichere Classifier")
-    pickle.dump(mlp, open(output_file+"_with_"+str(current_neurons)+"_neurons", 'wb'))
     mean_score_train[cur_neur_no]/=i;
     mean_score_test[cur_neur_no]/=i;
     cur_neur_no+=1
-
 
 cur_neur_no = 0
 print("Ergebnisse \n");
 for current_neurons in hidden_neurons:
     print("Fuer "+str(current_neurons)+" Neuronen\n")
-    print("Mean train score (accuracy) = "+str(mean_score_train[cur_neur_no])+"\n")
-    print("Mean test score (accuracy) = "+str(mean_score_test[cur_neur_no])+"\n")
+    print("Mean train score = "+str(mean_score_train[cur_neur_no])+"\n")
+    print("Mean test score  = "+str(mean_score_test[cur_neur_no])+"\n")
     cur_neur_no+=1
 
 # Training
