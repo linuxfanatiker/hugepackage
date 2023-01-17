@@ -18,12 +18,12 @@ labels_train = []
 
 data_test = []
 labels_test = []
-
+# Die Traingsdaten mit Labels werden importiert
 with open('sample_labels_rev1.csv', newline='') as csvfile:
 	complete_csv = csv.reader(csvfile, delimiter=',')
-	for row in complete_csv:
+	for row in complete_csv:					
 		complete_content.append([ [float(row[1])], row[2] ])
-
+		
 	random.shuffle(complete_content)
 	no_samples=len(complete_content)
 	ninety_percent=no_samples*0.9
@@ -70,11 +70,10 @@ print(data_test)
 print("Test Ergebnis: labels")
 print(labels_test)
 
-
-hidden_neurons=[1,5,10,25,50]        # Anzahl der Neuronen für die verschiedenen Durchläufe
-#hidden_neurons=[1,5]        # Anzahl der Neuronen für die verschiedenen Durchläufe
-mean_score_train=[]
-mean_score_test=[]
+hidden_neurons=[1,5,10,25,50]   # Anzahl der Neuronen für die verschiedenen Durchläufe
+#hidden_neurons=[1,5]        	# Anzahl der Neuronen für die verschiedenen Durchläufe
+mean_score_train=[]		# Durschnitttrefferquote im Training
+mean_score_test=[]		# Durschnitttrefferquote im Test
 
 
 # Instantiiere MLP Classifier
@@ -99,6 +98,7 @@ for current_neurons in hidden_neurons:
 
 cur_neur_no = 0
 print("Ergebnisse \n");
+# Ausgabe der Ergebnisse
 for current_neurons in hidden_neurons:
     print("Fuer "+str(current_neurons)+" Neuronen\n")
     print("Mean train score = "+str(mean_score_train[cur_neur_no])+"\n")
