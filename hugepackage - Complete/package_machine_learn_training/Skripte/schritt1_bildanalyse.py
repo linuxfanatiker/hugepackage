@@ -28,6 +28,7 @@ bilder_gelb_anteil = []
 bilder_laengste_reihe = []
 bilder_gelb_ueber_max = []
 bilder_gelb_unter_max = []
+debug_ueber_unter_verh = []
 
 for file in sorted_filelist:
     print ("Verarbeite Bild " + path_to_files+"/"+file)
@@ -37,8 +38,18 @@ for file in sorted_filelist:
     bilder_laengste_reihe.append(analyse[1])
     bilder_gelb_ueber_max.append(analyse[2])
     bilder_gelb_unter_max.append(analyse[3])
+    if (analyse[3]>0):
+       debug_ueber_unter_verh.append(analyse[2]/analyse[3])
+    else:
+       debug_ueber_unter_verh.append(0)
 
-plt.plot(range(0,len(sorted_filelist)),bilder_gelb_anteil, bilder_gelb_ueber_max, bilder_gelb_unter_max)
+figure, axis = plt.subplots(4,1)
+
+axis[0].plot(range(0,len(sorted_filelist)),bilder_gelb_anteil, color='black')
+axis[1].plot(range(0,len(sorted_filelist)),bilder_gelb_ueber_max, color='red')
+axis[2].plot(range(0,len(sorted_filelist)),bilder_gelb_unter_max, color='blue')
+axis[3].plot(range(0,len(sorted_filelist)),debug_ueber_unter_verh, color='cyan')
+axis[3].set_ylim([0,1.1])
 plt.show()
 
 outfile=open(output_filename, 'w')
