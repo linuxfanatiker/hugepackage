@@ -27,7 +27,8 @@ output_file= sys.argv[1]
 with open('sample_labels_rev1.csv', newline='') as csvfile:
 	complete_csv = csv.reader(csvfile, delimiter=',')
 	for row in complete_csv:
-		complete_content.append([ [ float(row[1]), float(row[2]), float(row[3]), float(row[4]) ], row[5] ])
+#		complete_content.append([ [ float(row[1]), float(row[2]), float(row[3]), float(row[4]) ], row[5] ])
+		complete_content.append([ [ float(row[1]), float(row[2]) ], row[5] ])
 
 	random.shuffle(complete_content)
 	no_samples=len(complete_content)
@@ -46,7 +47,8 @@ with open('sample_labels_rev1.csv', newline='') as csvfile:
 with open('sample_labels_rev2.csv', newline='') as csvfile:
 	complete_csv = csv.reader(csvfile, delimiter=',')
 	for row in complete_csv:
-		complete_content.append([ [ float(row[1]), float(row[2]), float(row[3]), float(row[4]) ], row[5] ])
+#		complete_content.append([ [ float(row[1]), float(row[2]), float(row[3]), float(row[4]) ], row[5] ])
+		complete_content.append([ [ float(row[1]), float(row[2]) ], row[5] ])
 #		complete_content.append([ [float(row[1])], row[2] ])
 
 	random.shuffle(complete_content)
