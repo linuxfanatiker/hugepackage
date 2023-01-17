@@ -21,7 +21,7 @@ while [ true ]; do
 # Beleuchtung einschalten
   pigs w 18 1
 # Aufnahme starten
-  raspistill -e png -o $FILENAME -w 800 -h 600 -t 500
+  raspistill -e png -o $FILENAME -w 800 -h 600 -t 500 -awb fluorescent
 # Beleuchtung ausschalten
   pigs w 18 0
   echo "$FILENAME erstellt"
