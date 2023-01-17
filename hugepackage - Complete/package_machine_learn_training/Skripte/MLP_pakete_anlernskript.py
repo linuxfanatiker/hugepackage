@@ -20,8 +20,8 @@ data_test = []
 labels_test = []
 # Die Traingsdaten mit Labels werden importiert
 with open('sample_labels_rev1.csv', newline='') as csvfile:
-	complete_csv = csv.reader(csvfile, delimiter=',')
-	for row in complete_csv:					
+	complete_csv = csv.reader(csvfile, delimiter=',')		#csvfile wird in in das Array complete_csv überschrieben. Das Ende der reihe wird durch ein Komma erkannt.
+	for row in complete_csv:					#
 		complete_content.append([ [float(row[1])], row[2] ])
 		
 	random.shuffle(complete_content)
@@ -71,7 +71,7 @@ print("Test Ergebnis: labels")
 print(labels_test)
 
 hidden_neurons=[1,5,10,25,50]   # Anzahl der Neuronen für die verschiedenen Durchläufe
-#hidden_neurons=[1,5]        	# Anzahl der Neuronen für die verschiedenen Durchläufe
+#hidden_neurons=[1,5]        	# ""
 mean_score_train=[]		# Durschnitttrefferquote im Training
 mean_score_test=[]		# Durschnitttrefferquote im Test
 
