@@ -2,7 +2,7 @@ import copy
 from matplotlib import pyplot as plt
 
 
-
+# Features aus einem Bild erkennen
 def yellow_features(img):
     # Aufloesung feststellen
     width, height = img.size
@@ -14,7 +14,7 @@ def yellow_features(img):
     # Schritt 1: Bild in HSV konvertieren
     img = img.convert('HSV')
 
-    # Schritt 2: Durch alle Pixel des Bilds durchlaufen
+    # Schritt 2: Alle Pixel des Bilds durchlaufen
     current_pixel_number=0
     for pixel in img.getdata():
         current_row = int(current_pixel_number/width)                   # Aktuelle Reihe im Bild feststellen
@@ -23,16 +23,16 @@ def yellow_features(img):
             yellow_pixel_per_row[current_row] +=1                       # Anzahl der gelben Pixel in der entsprechenden Reihe erhoehen
         current_pixel_number += 1
 
-    # Schritt 3: Reihe mit den meisten gelben Pixel herausfinden
+    # Schritt 3: Reihe mit den meisten gelben Pixeln herausfinden
     for current_row in range(0, len(yellow_pixel_per_row)):
         if (yellow_pixel_per_row[current_row]>yellow_pixel_per_row[yellow_pixel_largest_row]):
             yellow_pixel_largest_row=current_row                        # Diese Reihe beinhaltet das größte Vorkommen gelber Pixel. Merken.
 
-    # Schritt 4: Anzahl der gelben Reihen über und unter der Reihe
+    # Schritt 4: Anzahl der gelben Reihen über und unter der Reihe mit den meisten gelben Pixeln
     yellow_rows_above_maximum = 0
     yellow_rows_below_maximum = 0
     skipped_lines=0
-    threshold=width*0.02;
+    threshold=width*0.02;#
     # Zähle alle Reihen oberhalb der "längsten gelben Reihe"
     for i in range(1,yellow_pixel_largest_row):
         if (yellow_pixel_per_row[yellow_pixel_largest_row-i]>threshold):
@@ -58,6 +58,7 @@ def yellow_features(img):
 
     return [yellow_pixel_amount_normed, yellow_pixel_largest_row_normed, yellow_rows_above_maximum_normed, yellow_rows_below_maximum_normed]
 
+# DEBUG Funktion, Features werden neben original Bild angezeigt
 def plot_img_with_yellow_pixels(img):
     # Aufloesung feststellen
     width, height = img.size
