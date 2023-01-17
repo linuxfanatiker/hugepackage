@@ -1,6 +1,8 @@
 # hugepackage
 HBRS project huge package inspector
 
+## Idee
+Die Idee ist es die Größe eines Paketes festzustellen, um das einsortieren an Paketstationen zu vereinfachen. Als einfachen Ansatz werden die Standard Pakete von DHL verwendet, diese sind zu einem großen Anteil gelb farbend. Folgend wurde eine Skript geschrieben das die Anzahl gelber Pixel erkennen kann. Je größer das Paket desto mehr Pixel können gezählt werden. Ein Problem was nun auftaucht ist, das bei größerer Entfernung des Pakets zur Kamera sich die Anzahl der Pixel verringert. Lösungsansatz dafür ist es die längste horizontale Linie zu finden, um somit herauszufinden in welcher Reihe sich diese befindet und somit die vertikale Position zu bestimmen.
 
 ## Betriebsanleitung des Raspberrypi
 Pi mit Strom versorgen
