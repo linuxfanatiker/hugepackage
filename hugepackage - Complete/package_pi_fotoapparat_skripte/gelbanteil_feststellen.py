@@ -16,5 +16,5 @@ img = Image.open(path)
 #img = img.convert('HSV')
 gelb_anteil, laengste_reihe, reihen_ueber_max, reihen_unter_max=yellow_features(img)
 
-print("Gelbanteil, Lage der Reihe mit den meisten gelben Pixeln, gelbe Reihen darueber, und darunter")
+#print("Gelbanteil, Lage der Reihe mit den meisten gelben Pixeln, gelbe Reihen darueber, und darunter")
 print(str(gelb_anteil)+','+str(laengste_reihe)+','+str(reihen_ueber_max)+','+str(reihen_unter_max))

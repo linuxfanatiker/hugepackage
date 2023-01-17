@@ -7,7 +7,7 @@ from skimage import io
 import sys
 
 current_feature = []
-current_feature.append( [float(sys.argv[1]),float(sys.argv[2])] )
+current_feature.append( [float(sys.argv[1]),float(sys.argv[2]),float(sys.argv[3]),float(sys.argv[4])] )
 
 # INFERENZ auf RASPBERRY
 # Trainiertes Netzwerk wieder einlesen

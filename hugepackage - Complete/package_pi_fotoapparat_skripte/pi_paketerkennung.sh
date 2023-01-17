@@ -30,14 +30,25 @@ while [ true ]; do
   IFS=','
 # ggf umbenennen: feature_extraktion.py
   read -ra IMG_INFO <<< `python ./gelbanteil_feststellen.py $FILENAME`
+  echo "DATEN $IMG_INFO"
   GELBEPIXEL=${IMG_INFO[0]}
   REIHE=${IMG_INFO[1]}
-  echo "Gelbanteil is $GELBEPIXEL"
+  UEBER_MAX=${IMG_INFO[2]}
+  UNTER_MAX=${IMG_INFO[3]}
+  echo "Gelbanteil ist $GELBEPIXEL"
   echo "Laenste Reihe ist $REIHE"
   echo "Erkennung laufen lassen"
-  python ./mlp_inference_durchfuehren.py $GELBEPIXEL $REIHE
+  python ./mlp_inference_durchfuehren.py $GELBEPIXEL $REIHE $UEBER_MAX $UNTER_MAX
   PREDICTION=$?
-  echo "Prediction ist $PREDICTION"
+  if [ "$PREDICTION" == "1" ]; then
+  	echo "Paketgroesse XS"
+  elif [ "$PREDICTION" == "2" ]; then
+	echo "Paketgroesse S"
+  elif [ "$PREDICTION" == "3" ]; then
+	echo "Paketgroesse M"
+  else
+	echo "Es wurde kein gelbes Paket erkannt"
+  fi
   if [ "$DEBUG" = "DEBUG" ]; then
   kill $!
   python ./gelbanteil_debug.py $FILENAME &
