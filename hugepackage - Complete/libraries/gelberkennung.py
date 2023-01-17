@@ -3,7 +3,9 @@ from matplotlib import pyplot as plt
 
 
 saturation=20
-
+value=50
+min_angle=30
+max_angle=70
 
 # Features aus einem Bild erkennen
 def yellow_features(img):
@@ -21,7 +23,7 @@ def yellow_features(img):
     current_pixel_number=0
     for pixel in img.getdata():
         current_row = int(current_pixel_number/width)                   # Aktuelle Reihe im Bild feststellen
-        if (19<pixel[0]<90 and pixel[1]>saturation and 50<pixel[2]):             # Dies erkennt das Gelb
+        if (min_angle<pixel[0]<max_angle and pixel[1]>saturation and value<pixel[2]):             # Dies erkennt das Gelb
             yellow_pixel_amount += 1                                    # Anzahl der gelben Pixel erhoehen
             yellow_pixel_per_row[current_row] +=1                       # Anzahl der gelben Pixel in der entsprechenden Reihe erhoehen
         current_pixel_number += 1
@@ -83,7 +85,7 @@ def plot_img_with_yellow_pixels(img):
     current_pixel_number=0
     for pixel in img_orig.getdata():
         current_row = int(current_pixel_number/width)                   # Aktuelle Reihe im Bild feststellen
-        if (19<pixel[0]<90 and pixel[1]>saturation and 50<pixel[2]):             # Dies erkennt das Gelb
+        if (min_angle<pixel[0]<max_angle and pixel[1]>saturation and value<pixel[2]):             # Dies erkennt das Gelb
             img_rot_data.append(leuchtend_rot_hsv)
             yellow_pixel_per_row[current_row] +=1                       # Anzahl der gelben Pixel in der entsprechenden Reihe erhoehen
         else:
