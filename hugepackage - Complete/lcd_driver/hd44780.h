@@ -1,13 +1,13 @@
-#define LCD_D4 7
-#define LCD_D5 8
-#define LCD_D6 25
-#define LCD_D7 11
-#define LCD_E1 10
-#define LCD_E2 18
-#define LCD_E3 24
+#define LCD_D4 6
+#define LCD_D5 13
+#define LCD_D6 19
+#define LCD_D7 26
+#define LCD_E1 21
+#define LCD_E2 21
+#define LCD_E3 21
 #define LCD_EN_ORDER {LCD_E3, LCD_E2, LCD_E3}
-#define LCD_RS 9
-#define LCD_RW 4
+#define LCD_RS 16
+#define LCD_RW 20
 
 // minimum time for waiting after instructions in usec
 // increase value, if raspberry to quick for lcd-driver

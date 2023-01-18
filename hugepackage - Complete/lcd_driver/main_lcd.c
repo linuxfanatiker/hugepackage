@@ -19,21 +19,6 @@ int testeditor(int rows)
 	return 0;
 }
 
-int testfileout()
-{
-	const char filename[]="/tmp/testfile.txt";
-	char buf[200];
-	FILE * fp;
-	int line=0;
-	fp=fopen(filename, "r");
-	while (fgets(buf, 200, fp)!=NULL) {
-		lcdWriteLine(buf, line);
-		if (++line>=LCD_ROWS) line=0;
-	}
-	fclose(fp);
-	return 0;
-}
-
 int teststdin()
 {
 	const int trunc=0;
@@ -48,48 +33,11 @@ int teststdin()
 	return 0;
 }
 
-int testuart()
-{
-	char  buf[300];
-	int  buf2=0;
-	int  lastbuf=0;
-	if (INIT_UART()>=0) {;
-
-	while(1) {
-		lastbuf=buf2;
-		buf2=readUartNonPolling();
-		if (buf2>32) {
-			printf("%c(%x)\n", buf2, buf2);
-			lcdWriteChar(buf2);
-		}
-		else if (buf2==0xa) {
-			printf("LF(%x)", buf2);
-			if (lastbuf!=buf2) lcdNewLine();
-		}
-
-		/*readStringUartNonPolling(buf, 299);
-		printf("%s", buf);
-		lcdWriteLine(buf, -1);*/
-	}
-
-	CLOSE_UART();
-	}
-
-	else {
-		printf("UART_INIT_ERROR\n");
-		return -1;
-	}
-}
-
 int primaryLoop()
 {
-/*	char * flarm;
-	flarm=flarmUartGetLine();
-	if (flarm!=NULL) flarmParseSentence(flarm);
-	free(flarm);*/
 	char buf [300];
 	if(fgets(buf, 83, stdin)!=NULL) {
-		flarmParseSentence(buf);
+//		flarmParseSentence(buf);
 		gpioDelay(2000);
 	}
 }
@@ -108,18 +56,30 @@ int main(void)
 	}
 
 	init4bit(LCD_E1);
-	init4bit(LCD_E2);
-	init4bit(LCD_E3);
 
-	if (INIT_UART()>=0) {
-		frontendTrafficInfoPage();
-		frontendGPSStatusPage();
-	}
 
-	CLOSE_UART();
 
-	return 0;
+	lcdWriteLine("Hallo", 0);
+	lcdWriteLine("Jan", 1);
 
+	sleep(5);
+
+	lcdWriteLine("Hallo", 1);
+	lcdWriteLine("Martin", 0);
+
+
+	sleep(5);
+
+	lcdWriteLine("Hallo", 0);
+	lcdWriteLine("Jan", 1);
+
+	while(1) teststdin();
+
+
+
+//	init4bit(LCD_E2);
+//	init4bit(LCD_E3);
+/*
 	{
 		char *data;
 		int i,z;
@@ -135,27 +95,16 @@ int main(void)
 	}
 
 
-/*
-	init4bit(LCD_E2);
 
-	send4bit_byte(LCD_E2, 'b', 1, -1);
-	send4bit_byte(LCD_E2, 'l', 1, -1);
-	send4bit_byte(LCD_E2, 'j', 1, -1);
-	send4bit_byte(LCD_E2, 'a', 1, -1);
-	send4bit_byte(LCD_E2, 'd', 1, -1);
+	init4bit(LCD_E1);
 
-	send4bit_byte(LCD_E2, CMD_SETDDRAM|0x40, 0, -1);
-	send4bit_byte(LCD_E2, 'K', 1, -1);
-	send4bit_byte(LCD_E2, 'u', 1, -1);
-	send4bit_byte(LCD_E2, 'r', 1, -1);
-	send4bit_byte(LCD_E2, 'v', 1, -1);
-	send4bit_byte(LCD_E2, 'a', 1, -1);
-	send4bit_byte(LCD_E2, CMD_DISPLAY|PAR_DISPLAY_ON|PAR_CURSOR_OFF, 0, -1);
+	send4bit_byte(LCD_E1, 'b', 1, -1);
+	send4bit_byte(LCD_E1, 'l', 1, -1);
+	send4bit_byte(LCD_E1, 'j', 1, -1);
+	send4bit_byte(LCD_E1, 'a', 1, -1);
+	send4bit_byte(LCD_E1, 'd', 1, -1);
 */
 
-
-
-	gpioTerminate();
 	return errorcode;
 }
 

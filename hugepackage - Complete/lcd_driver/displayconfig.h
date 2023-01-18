@@ -4,7 +4,7 @@
 #define TC1602 2
 #define _204B 3
 
-#define LCD_BRAND _204B
+#define LCD_BRAND TC1602
 
 #define LCD_4X201324 4
 #define LCD_2X2X     5
@@ -32,7 +32,7 @@
 #define	LCD_CONTROLLERS 1
 #define LCD_ROWS 2
 #define LCD_COLS 16
-#define LCD_DDRAM_OFFSETS {0x0, 0x40}
+#define LCD_DDRAM_OFFSETS {0x80, 0xC0}
 #define LCD_DDRAM_WIDTH 0x10
 #define LCD_LINE_CONTROLLERS {0, 0}
 
