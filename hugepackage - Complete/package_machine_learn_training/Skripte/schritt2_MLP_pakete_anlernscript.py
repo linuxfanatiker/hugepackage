@@ -44,7 +44,52 @@ with open('sample_labels_rev1.csv', newline='') as csvfile:
 		data_test.append(complete_content[i][0])
 		labels_test.append(complete_content[i][1])
 		i=i+1
+
 with open('sample_labels_rev2.csv', newline='') as csvfile:
+	complete_csv = csv.reader(csvfile, delimiter=',')
+	for row in complete_csv:
+#		complete_content.append([ [ float(row[1]), float(row[2]), float(row[3]), float(row[4]) ], row[5] ])
+		complete_content.append([ [ float(row[1]), float(row[2]) ], row[5] ])
+#		complete_content.append([ [float(row[1])], row[2] ])
+
+	random.shuffle(complete_content)
+	no_samples=len(complete_content)
+	ninety_percent=no_samples*0.9
+	i = 0
+
+	while i < ninety_percent:
+		data_train.append(complete_content[i][0])
+		labels_train.append(complete_content[i][1])
+		i=i+1
+
+	while i < no_samples:
+		data_test.append(complete_content[i][0])
+		labels_test.append(complete_content[i][1])
+		i=i+1
+
+with open('sample_labels_rev3.csv', newline='') as csvfile:
+	complete_csv = csv.reader(csvfile, delimiter=',')
+	for row in complete_csv:
+#		complete_content.append([ [ float(row[1]), float(row[2]), float(row[3]), float(row[4]) ], row[5] ])
+		complete_content.append([ [ float(row[1]), float(row[2]) ], row[5] ])
+#		complete_content.append([ [float(row[1])], row[2] ])
+
+	random.shuffle(complete_content)
+	no_samples=len(complete_content)
+	ninety_percent=no_samples*0.9
+	i = 0
+
+	while i < ninety_percent:
+		data_train.append(complete_content[i][0])
+		labels_train.append(complete_content[i][1])
+		i=i+1
+
+	while i < no_samples:
+		data_test.append(complete_content[i][0])
+		labels_test.append(complete_content[i][1])
+		i=i+1
+
+with open('sample_labels_rev4.csv', newline='') as csvfile:
 	complete_csv = csv.reader(csvfile, delimiter=',')
 	for row in complete_csv:
 #		complete_content.append([ [ float(row[1]), float(row[2]), float(row[3]), float(row[4]) ], row[5] ])
@@ -78,7 +123,8 @@ print(labels_test)
 
 
 #hidden_neurons=[5,50,60,80,100]        # Anzahl der Neuronen für die verschiedenen Durchläufe
-hidden_neurons=[1,2,3,4,5,20,40]        # Anzahl der Neuronen für die verschiedenen Durchläufe
+#hidden_neurons=[1,2,3,4,5,20,40]        # Anzahl der Neuronen für die verschiedenen Durchläufe
+hidden_neurons=[5,10,20,40,60,80]        # Anzahl der Neuronen für die verschiedenen Durchläufe
 mean_score_train=[]
 mean_score_test=[]
 
@@ -90,7 +136,7 @@ for current_neurons in hidden_neurons:
     mean_score_train.append(0)
     mean_score_test.append(0)
     while i <10:
-        mlp = skl_nn.MLPClassifier(hidden_layer_sizes=(current_neurons,), max_iter=2000, verbose=1, random_state=1)
+        mlp = skl_nn.MLPClassifier(hidden_layer_sizes=(current_neurons,current_neurons,), max_iter=2000, verbose=1, random_state=1)
         mlp.fit(data_train, labels_train)
         current_train_score = mlp.score(data_train, labels_train)
         current_test_score  = mlp.score(data_test, labels_test)
