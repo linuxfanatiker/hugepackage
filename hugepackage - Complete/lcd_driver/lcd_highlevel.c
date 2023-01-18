@@ -200,3 +200,27 @@ char * getDDRamData(int controller, int address, int len)
 	return data;
 }
 
+int lcdGotoXY(int x, int y) 
+{
+    const int controllers[]=LCD_LINE_CONTROLLERS;
+    const int offsets[]=LCD_DDRAM_OFFSETS;
+    int address;
+    if (x>=LCD_COLS) return -1;
+    if (y>=LCD_ROWS) return -1;
+
+    address=offsets[y]+x;
+
+    position[POSY]=y;
+    position[POSX]=x;
+
+    return setDDRamAddress(controllers[y], address);
+}
+
+int clearScreen()
+{
+    const int controllers[]=LCD_LINE_CONTROLLERS;
+    const int offsets[]=LCD_DDRAM_OFFSETS;
+
+    writeCtrl_waitBusy(data, controller, time_us) send4bit_byte(controller, data, 0, -1);
+}
+

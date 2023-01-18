@@ -1,0 +1,1 @@
+gcc -o lcd hd44780.c lcd_highlevel.c main_lcd.c -lpigpio -lrt

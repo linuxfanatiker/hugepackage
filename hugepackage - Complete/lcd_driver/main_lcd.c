@@ -23,7 +23,9 @@ int teststdin()
 {
 	const int trunc=0;
 	char buf[200];
-	int result;
+	int result=0;
+    lcdGotoXY(0,0);
+
 	while (fgets(buf, 200, stdin)!=NULL) {
 		if (result==2) lcdNewLine();
 		result=lcdWriteLine(buf+trunc, -1);
@@ -56,22 +58,6 @@ int main(void)
 	}
 
 	init4bit(LCD_E1);
-
-
-
-	lcdWriteLine("Hallo", 0);
-	lcdWriteLine("Jan", 1);
-
-	sleep(5);
-
-	lcdWriteLine("Hallo", 1);
-	lcdWriteLine("Martin", 0);
-
-
-	sleep(5);
-
-	lcdWriteLine("Hallo", 0);
-	lcdWriteLine("Jan", 1);
 
 	while(1) teststdin();
 
