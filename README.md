@@ -12,7 +12,7 @@ Pi mit Strom versorgen
 WLAN des PIs erscheint automatisch in der Netzwerkliste nach dem Hochfahren:
 ```
 Name: hugepackage
-Pwd: hugePck!23
+Pwd: 
 ```
 ### Zugang über Linux Konsole:
 
