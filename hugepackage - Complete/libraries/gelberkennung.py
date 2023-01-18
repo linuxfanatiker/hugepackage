@@ -1,10 +1,10 @@
 import copy
 from matplotlib import pyplot as plt
 
-
+# Werte vom 18.01.2023, 13:30 Uhr
 saturation=20
 value=50
-min_angle=30
+min_angle=27
 max_angle=70
 
 # Features aus einem Bild erkennen
