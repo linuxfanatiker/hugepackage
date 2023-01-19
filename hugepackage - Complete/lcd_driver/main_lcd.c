@@ -27,10 +27,13 @@ int process_stdin()
 		printf ("Zeile erhalten %s\n", buf);
 		if (line>1) {
 			lcdBlankLine(0);
+			gpioDelay(2000);
 			lcdBlankLine(1);
+			gpioDelay(2000);
 			line=0;
 		}
 		lcdWriteLine(buf, line++);
+		gpioDelay(2000);
 	}
 }
 
@@ -103,7 +106,10 @@ int main(void)
 
 //	lcdInstruction(LCD_INSTR_CURSOFF);
 
-	while(1) process_stdin();
+	while(1) {
+		process_stdin();
+		gpioDelay(20000);
+	}
 
 
 

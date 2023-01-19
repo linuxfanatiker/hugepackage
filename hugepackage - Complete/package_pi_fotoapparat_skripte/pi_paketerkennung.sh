@@ -24,7 +24,7 @@ pigs modes 18 w
 pigs w 18 0
 
 while [ true ]; do
-  display "Taste druecken" "fuer Erkennung"
+  display "Taste druecken  " "fuer Erkennung "
   while [ $KEY -ge 1 ]
   do
      KEY=`pigs r 23`
@@ -32,7 +32,7 @@ while [ true ]; do
   echo "Warte auf Ausloeser"
   echo "Ausloeser gedrueckt"
   KEY=1
-  display "Erkennung laeuft" "Bitte warten"
+  display "Erkennung laeuft" "Bitte warten    "
 # Beleuchtung einschalten
   pigs w 18 1
 # Aufnahme starten
@@ -58,17 +58,17 @@ while [ true ]; do
   ERKANNT="Erkanntes Paket"
   if [ "$PREDICTION" == "1" ]; then
   	echo "Paketgroesse XS"
-	PAKET="Paket XS"
+	PAKET="Paket XS        "
   elif [ "$PREDICTION" == "2" ]; then
 	echo "Paketgroesse S"
-	PAKET="Paket S"
+	PAKET="Paket S         "
   elif [ "$PREDICTION" == "3" ]; then
 	echo "Paketgroesse M"
-	PAKET="Paket M"
+	PAKET="Paket M         "
   else
 	echo "Es wurde kein gelbes Paket erkannt"
-	ERKANNT="Es wurde kein"
-	PAKET="Paket erkannt"
+	ERKANNT="Es wurde kein   "
+	PAKET="Paket erkannt   "
   fi
 
 	display $ERKANNT $PAKET
