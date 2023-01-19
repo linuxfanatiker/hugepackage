@@ -33,7 +33,7 @@ Jetzt kann über den Knopf die Kamera ausgelöst und die Erkennung gestartet wer
 
 Foto mit 800x600 Auflösung und Beleuchtung wird aufgenommen. 
 
-Der Teststand verbraucht 3-4,5 Watt.
+Der Teststand verbraucht 4 Watt im idle und bei der Erkennung 4,5 Watt.
 
 Das [Featureskript](https://github.com/linuxfanatiker/hugepackage/blob/master/hugepackage%20-%20Complete/package_pi_fotoapparat_skripte/pi_paketerkennung.sh) wird aufgerufen, um die Anzahl der gelben Pixel zu zählen und die Position des Pakets festzustellen. Durch eingabe von DEBUG wird angezeigt wie das Bild bearbeitet wird.
 
