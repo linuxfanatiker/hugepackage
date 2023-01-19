@@ -31,10 +31,10 @@ int lcdWriteChar(char data)
 #endif
 	switch (data) {
 		default:	if (data>0x1F && data<0x7F) {	// omit control characters, only ascii
-					errorcode=send4bit_byte(controllerActive, data, RS(1), WBUSYNOHANG);
-				}
-				if (errorcode<0) return errorcode;
-				break;
+    					errorcode=send4bit_byte(controllerActive, data, RS(1), WBUSYNOHANG);
+				    }
+	    			if (errorcode<0) return errorcode;
+	    			break;
 	}
 
 	if (++position[POSX]>=LCD_DDRAM_WIDTH) {
@@ -216,11 +216,21 @@ int lcdGotoXY(int x, int y)
     return setDDRamAddress(controllers[y], address);
 }
 
-int clearScreen()
+int lcdInstruction(const unsigned char INSTRUCTION)
 {
     const int controllers[]=LCD_LINE_CONTROLLERS;
     const int offsets[]=LCD_DDRAM_OFFSETS;
-
-    writeCtrl_waitBusy(data, controller, time_us) send4bit_byte(controller, data, 0, -1);
+    int i;
+    
+/*    
+int read4bit_byte(int controller, int *data, int rs, int wait_busy)
+writeCtrl_waitBusy(data, controller, time_us) send4bit_byte(controller, data, 0, -1);
+*/
+    for (i=0; i<LCD_CONTROLLERS; i++) {
+        if (writeCtrl_waitBusy(INSTRUCTION, i, -1)<0) 
+            return -1;
+    }
+    return 0;
 }
+
 

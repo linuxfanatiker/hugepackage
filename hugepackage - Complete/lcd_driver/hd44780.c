@@ -39,6 +39,9 @@ int send4bit_byte(int controller, int data, int rs, int wait_busy)
 	return 0;
 }
 
+// wait_busy:   -1: Wait busy without timeout
+//              -2: Wait busy with timout
+//   0 or positive: Waiting time in microseconds
 int send4bit_nibble(int controller, int nibble, int rs, int wait_busy)
 {
 	const int busymax=100;
@@ -80,7 +83,7 @@ int read4bit_byte(int controller, int *data, int rs, int wait_busy)
 	int errorcode;
 	int buf;
 
-	errorcode=read4bit_nibble(controller, &buf, rs, -2);		// Sending MSB-Nibble
+	errorcode=read4bit_nibble(controller, &buf, rs, -2);		// Reading MSB-Nibble
 	if (errorcode<0) {
 #ifdef DEBUG
 		printf("read4bit_byte Error on upper nibble: %d\n", errorcode);
@@ -89,7 +92,7 @@ int read4bit_byte(int controller, int *data, int rs, int wait_busy)
 	}
 	*data=buf<<4;
 
-	errorcode=read4bit_nibble(controller, &buf, rs, 1);			// Sending LSB-Nibble
+	errorcode=read4bit_nibble(controller, &buf, rs, 1);			// Reading LSB-Nibble
 	if (errorcode<0) {
 #ifdef DEBUG
 		printf("read4bit_byte Error on lower nibble: %d\n", errorcode);
@@ -112,7 +115,7 @@ int read4bit_nibble(int controller, int * nibble, int rs, int wait_busy)
 			gpioDelay(1);
 			if (wait_busy==-2 && i++>=busymax) {
 #ifdef DEBUG
-				printf("send4bit_nibble: BusyTimeout ERROR\n");
+				printf("read4bit_nibble: BusyTimeout ERROR\n");
 #endif
 				return BFLG_ERROR_TIMEOUT;
 			} // if
@@ -125,6 +128,12 @@ int read4bit_nibble(int controller, int * nibble, int rs, int wait_busy)
 	gpioSetMode(LCD_D6, PI_INPUT);
 	gpioSetMode(LCD_D5, PI_INPUT);
 	gpioSetMode(LCD_D4, PI_INPUT);
+
+// Pull-Up resistors added
+    gpioSetPullUpDown(LCD_D7, PI_PUD_UP);
+    gpioSetPullUpDown(LCD_D6, PI_PUD_UP);
+    gpioSetPullUpDown(LCD_D5, PI_PUD_UP);
+    gpioSetPullUpDown(LCD_D4, PI_PUD_UP);
 
 	gpioWrite(LCD_RS, rs);
 	gpioWrite(LCD_RW, 1);
@@ -139,6 +148,12 @@ int read4bit_nibble(int controller, int * nibble, int rs, int wait_busy)
 
 	gpioWrite(controller, 0);
 	//gpioDelay(LCD_MIN_WAIT);
+
+// Pull-Up Resistors added
+    gpioSetPullUpDown(LCD_D7, PI_PUD_OFF);
+    gpioSetPullUpDown(LCD_D6, PI_PUD_OFF);
+    gpioSetPullUpDown(LCD_D5, PI_PUD_OFF);
+    gpioSetPullUpDown(LCD_D4, PI_PUD_OFF);
 
 	gpioSetMode(LCD_D7, PI_OUTPUT);
 	gpioSetMode(LCD_D6, PI_OUTPUT);
@@ -162,11 +177,17 @@ int check_busyflag(int controller_enable, int * pAc)
 	gpioSetMode(LCD_D5, PI_INPUT);			// Set D5 for input
 	gpioSetMode(LCD_D4, PI_INPUT);			// Set D4 for input
 
+// Pull-Up resistors added
+    gpioSetPullUpDown(LCD_D7, PI_PUD_UP);
+    gpioSetPullUpDown(LCD_D6, PI_PUD_UP);
+    gpioSetPullUpDown(LCD_D5, PI_PUD_UP);
+    gpioSetPullUpDown(LCD_D4, PI_PUD_UP);
+
 	gpioWrite(LCD_RS, 0);				// RS 0
 	gpioWrite(LCD_RW, 1);				// RW 1
 	gpioWrite(controller_enable, 1);		// ENABLE
 	gpioDelay(LCD_MIN_WAIT);			// Wait some usec
-	busyFlagLevel	 =gpioRead(LCD_D7);			// Read busyFlag
+	busyFlagLevel=gpioRead(LCD_D7);			// Read busyFlag
 	*pAc 		 =gpioRead(LCD_D6)<<6;			// Read AC upper nibble
 	*pAc		|=gpioRead(LCD_D5)<<5;
 	*pAc		|=gpioRead(LCD_D4)<<4;
@@ -184,6 +205,13 @@ int check_busyflag(int controller_enable, int * pAc)
 	gpioWrite(controller_enable, 0);		// DISABLE
 //	gpioDelay(LCD_MIN_WAIT);
 	gpioWrite(LCD_RW, 0);				// RW to default LOW
+
+// Pull-Up Resistors added
+    gpioSetPullUpDown(LCD_D7, PI_PUD_OFF);
+    gpioSetPullUpDown(LCD_D6, PI_PUD_OFF);
+    gpioSetPullUpDown(LCD_D5, PI_PUD_OFF);
+    gpioSetPullUpDown(LCD_D4, PI_PUD_OFF);
+
 	gpioSetMode(LCD_D7, PI_OUTPUT);			// D7 to default OUTPUT
 	gpioSetMode(LCD_D6, PI_OUTPUT);			// D6 to default OUTPUT
 	gpioSetMode(LCD_D5, PI_OUTPUT);			// D5 to default OUTPUT
@@ -204,12 +232,13 @@ int check_busyflag(int controller_enable, int * pAc)
 /* Init and Set LCD in 4 Bit Mode */
 void init4bit(int controller)
 {
-	gpioDelay(15000);							// Wait at least 15ms
+	gpioDelay(15000);					                    		// Wait at least 15ms
 	send4bit_nibble(controller, 0b00000011, 0, LCD_MIN_WAIT);		// Send D5 D4
 	gpioDelay(6000);
 	send4bit_nibble(controller, 0b00000011, 0, LCD_MIN_WAIT);		// Send D5 D4
 	gpioDelay(200);
 	send4bit_nibble(controller, 0b00000011, 0, LCD_MIN_WAIT);		// Send D5
+
 	send4bit_nibble(controller, 0b00000010, 0, -2);				// Erste Funkion mit Busy Flag
 
 	send4bit_byte(controller,   0b00101000, 0, -2);		// Zeilen und Character Setzen
