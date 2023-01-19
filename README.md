@@ -16,6 +16,8 @@ Pwd:
 ```
 ### Zugang über Linux Konsole:
 
+Beim booten des Pis wird über /etc/rc.local automatisch ein Skript geladen.
+
 ssh -X pi@192.168.2.5
 ```
 Pi IP: 192.168.2.5
@@ -25,9 +27,16 @@ siehe Screenshot:
 
 ![](https://github.com/linuxfanatiker/hugepackage/blob/master/screenshot_console.png)
 
-Die Dateien zur Paketerkennung befinden sich im hugepackage Ordner, die Erkennung beginnt automatisch durch folgendes [Skript](https://github.com/linuxfanatiker/hugepackage/blob/master/hugepackage%20-%20Complete/package_pi_fotoapparat_skripte/pi_paketerkennung.sh).
+Die Dateien zur Paketerkennung befinden sich im hugepackage Ordner, die Erkennung beginnt automatisch durch folgendes [Skript](https://github.com/linuxfanatiker/hugepackage/blob/master/hugepackage%20-%20Complete/package_pi_fotoapparat_skripte/pi_paketerkennung.sh). Dieses startet den LCD-Treiber und wartet dann auf einen Tastendruck.
 
 Jetzt kann über den Knopf die Kamera ausgelöst und die Erkennung gestartet werden. Mehrfaches auslösen ist möglich, dass vorherige Bild wird übeschrieben.
+
+Herunterfahren des PIs geht über folgenden Befehl:
+```
+sudo shutdown -h now
+```
+
+
 
 ### Genereller Ablauf:
 
