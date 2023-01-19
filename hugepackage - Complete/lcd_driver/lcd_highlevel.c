@@ -227,7 +227,7 @@ int read4bit_byte(int controller, int *data, int rs, int wait_busy)
 writeCtrl_waitBusy(data, controller, time_us) send4bit_byte(controller, data, 0, -1);
 */
     for (i=0; i<LCD_CONTROLLERS; i++) {
-        if (writeCtrl_waitBusy(INSTRUCTION, i, -1)<0) 
+        if (writeCtrl_waitBusy(INSTRUCTION, i, -1)<0)
             return -1;
     }
     return 0;

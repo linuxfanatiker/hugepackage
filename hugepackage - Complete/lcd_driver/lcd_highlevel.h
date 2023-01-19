@@ -8,7 +8,7 @@ int lcdMoveLine(int, int);
 int setDDRamAddress(int, int);
 char * getDDRamData(int, int, int);
 int lcdGotoXY(int, int);
-int lcdInstruction();
+int lcdInstruction(const unsigned char);
 #ifdef LCDEMU
     int lcd_emu_out();
 #endif

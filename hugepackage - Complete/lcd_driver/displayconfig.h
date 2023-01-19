@@ -18,6 +18,7 @@
 #endif
 
 #if	LCD_BRAND == TC1602
+#define LCD_TYPE TC1602
 #define	LCD_CONTROLLERS 1
 #define LCD_ROWS 2
 #define LCD_COLS 16

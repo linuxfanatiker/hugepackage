@@ -57,7 +57,7 @@ int main(void)
 		#endif
 	}
 
-	init4bit(LCD_E1);
+	init4bit(LCD_E3);
 
 	while(1) teststdin();
 
