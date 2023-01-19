@@ -1,0 +1,49 @@
+Erwartungen
+
+- "künstliche Intelligenz"
+- am Ende eine "Ente" in die Kamera halten und Bilderkennung
+- "wie funktioniert ein Neuronales Netz"
+- von Grund auf
+
+
+Herausforderungen
+
+- Verständnis Machine Learning
+- Bibliothek durchforsten
+- Überblick zu bekommen
+
+
+
+Schlüsselerlebnisse
+
+- erstes Training
+- erste Prediction
+- Farbraum der Gelberkennung
+- Kameraeinstellungen
+
+
+
+Erwartungen erfüllt?
+
+- Ergebnis ist nahe an der ursprünglichen Planung (ohne Fächermechanismus)
+- Materie "Machine Learning" nur angekratzt
+- Viel Arbeit drumherum ("features", "troubleshooting")
+
+
+Was haben wir gelernt
+
+- Ich weiss mit dem Thema mehr anzufangen
+- git
+- python vertiefung
+- bildbearbeitung
+- scripte in bash
+
+
+Projektorganisation
+
+- Besprechungen morgens und abends, alle auf einem Stand
+- Struktur hat durch Fehlschläge etc. hindurchgeführt
+- Ideen von allen Gruppenmitgliedern
+- Die Projektzeit hat ausgereicht wegen Parallelarbeit
+- Plan: Backup Tage wurden benötigt
+- 
