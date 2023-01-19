@@ -19,17 +19,59 @@ int testeditor(int rows)
 	return 0;
 }
 
+int process_stdin()
+{
+	char buf[200];
+	int line=0;
+	while (fgets(buf, 200, stdin)!=NULL) {
+		printf ("Zeile erhalten %s\n", buf);
+		if (line>1) {
+			lcdBlankLine(0);
+			lcdBlankLine(1);
+			line=0;
+		}
+		lcdWriteLine(buf, line++);
+	}
+}
+
 int teststdin()
 {
 	const int trunc=0;
 	char buf[200];
 	int result=0;
-    lcdGotoXY(0,0);
+	int i;
+	char str[17];
+
+	while (1) {
+		for (i='A'; i<'Y'; i++) {
+			sprintf(str, "Zeile %X", i);
+			lcdWriteLine(str, 0);
+			sprintf(str, "Zeile %X", i+1);
+			lcdWriteLine(str, 1);
+			sleep(1);
+		}
+	}
 
 	while (fgets(buf, 200, stdin)!=NULL) {
-		if (result==2) lcdNewLine();
+		if (result==2) {
+			#ifdef DEBUG
+			printf ("Now at last line and moving\n");
+			#endif
+			lcdNewLine();
+		}
 		result=lcdWriteLine(buf+trunc, -1);
-		if (result<2 && result>=0) lcdNewLine();
+		#ifdef DEBUG
+		printf("Resultat aus lcdWriteLine = %i\n", result);
+		#endif
+		if (result<2 && result>=0) {
+			#ifdef DEBUG
+			printf ("Not yet at last line next line\n");
+			#endif
+			lcdNewLine();
+		}
+		else if (result<0) {
+			printf ("Error in teststdin\n");
+		}
 		gpioDelay(5000);
 	}
 	return 0;
@@ -57,9 +99,11 @@ int main(void)
 		#endif
 	}
 
-	init4bit(LCD_E3);
+	init4bit(LCD_E1);
 
-	while(1) teststdin();
+//	lcdInstruction(LCD_INSTR_CURSOFF);
+
+	while(1) process_stdin();
 
 
 

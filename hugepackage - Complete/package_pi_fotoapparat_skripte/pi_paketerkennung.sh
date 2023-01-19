@@ -1,5 +1,11 @@
 #!/bin/bash
 
+cd /home/pi/pck_shortcut
+killall pigpiod
+rm /tmp/log
+touch /tmp/log
+tail -f /tmp/log | ./lcd &
+
 #FILENAME=$1
 FILENAME='/tmp/paketerkennung.png'
 DEBUG=$1
@@ -42,13 +48,18 @@ while [ true ]; do
   PREDICTION=$?
   if [ "$PREDICTION" == "1" ]; then
   	echo "Paketgroesse XS"
+	PAKET="XS"
   elif [ "$PREDICTION" == "2" ]; then
 	echo "Paketgroesse S"
+	PAKET="S"
   elif [ "$PREDICTION" == "3" ]; then
 	echo "Paketgroesse M"
+	PAKET="M"
   else
 	echo "Es wurde kein gelbes Paket erkannt"
   fi
+	echo "Erkanntes Paket" > /tmp/log
+	echo "Groesse $PAKET" > /tmp/log
   if [ "$DEBUG" = "DEBUG" ]; then
   kill $!
   python ./gelbanteil_debug.py $FILENAME &

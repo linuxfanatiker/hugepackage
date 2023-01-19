@@ -1,6 +1,7 @@
 #include "standard.h"
 
 #define BFLG_ERROR_TIMEOUT -1
+#undef DEBUG
 
 const int LCD_EN[]=LCD_EN_ORDER;
 
@@ -73,7 +74,7 @@ int send4bit_nibble(int controller, int nibble, int rs, int wait_busy)
 	gpioWrite(controller, 1);
 	gpioDelay(LCD_MIN_WAIT);
 	gpioWrite(controller, 0);
-//	gpioDelay(LCD_MIN_WAIT);
+	gpioDelay(LCD_MIN_WAIT);
 
 	return ac;
 }
@@ -147,7 +148,7 @@ int read4bit_nibble(int controller, int * nibble, int rs, int wait_busy)
 	*nibble|=gpioRead(LCD_D7)<<3;
 
 	gpioWrite(controller, 0);
-	//gpioDelay(LCD_MIN_WAIT);
+	gpioDelay(LCD_MIN_WAIT);
 
 // Pull-Up Resistors added
     gpioSetPullUpDown(LCD_D7, PI_PUD_OFF);
@@ -203,7 +204,7 @@ int check_busyflag(int controller_enable, int * pAc)
 	*pAc|=gpioRead(LCD_D5)<<1;
 	*pAc|=gpioRead(LCD_D4);
 	gpioWrite(controller_enable, 0);		// DISABLE
-//	gpioDelay(LCD_MIN_WAIT);
+	gpioDelay(LCD_MIN_WAIT);
 	gpioWrite(LCD_RW, 0);				// RW to default LOW
 
 // Pull-Up Resistors added

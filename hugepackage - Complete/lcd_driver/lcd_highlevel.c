@@ -53,6 +53,9 @@ int lcdWriteLine(char * data, int line)
 	int result;
 
 	if (line<0) {
+	#ifdef DEBUG
+	printf("lcdWriteLine: line parameter ist -1 : Aktuelle Line ist %i\n", position[POSY]);
+	#endif
 		line=position[POSY];
 	}
 
@@ -178,6 +181,9 @@ int setDDRamAddress(int controller, int address)
 	printf("setDDRamAddress: Set DDram-Address %X on Controller no. %d\n", address, controller);
 #endif
 	errorcode=send4bit_byte(LCD_EN[controller], (CMD_DDRAM|address), RS(0), -2);
+#ifdef DEBUG
+	printf("setDDRamAddress: Result %i\n", errorcode);
+#endif
 	return errorcode;
 }
 
@@ -195,7 +201,12 @@ char * getDDRamData(int controller, int address, int len)
 			free(data);
 			return NULL;
 		}
-		else *(data+i)=buf;
+		else {
+			*(data+i)=buf;
+			#ifdef DEBUG
+			printf("getDDRamData: Fetching from address %x, %c\n", address+i, buf);
+			#endif
+		}
 	}
 	return data;
 }
@@ -228,6 +239,9 @@ writeCtrl_waitBusy(data, controller, time_us) send4bit_byte(controller, data, 0,
 */
     for (i=0; i<LCD_CONTROLLERS; i++) {
         if (writeCtrl_waitBusy(INSTRUCTION, i, -1)<0)
+            #ifdef DEBUG
+            printf("instruction: fail\n");
+            #endif
             return -1;
     }
     return 0;

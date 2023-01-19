@@ -14,6 +14,6 @@ int lcdInstruction(const unsigned char);
 #endif
 
 #define LCD_INSTR_CLRSCR  0x01
-#define LCD_INSTR_CURSON  0x0F
-#define LCD_INSTR_CURSOFF 0x0D
+#define LCD_INSTR_CURSON  0b00001111
+#define LCD_INSTR_CURSOFF 0b00001110
 
