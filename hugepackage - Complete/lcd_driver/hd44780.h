@@ -28,7 +28,7 @@
 
 // minimum time for waiting after instructions in usec
 // increase value, if raspberry to quick for lcd-driver
-#define LCD_MIN_WAIT 5
+#define LCD_MIN_WAIT 50
 
 #define BUSY 1
 #define IDLE 0
